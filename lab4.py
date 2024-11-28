@@ -30,12 +30,14 @@ def optimize_inventory(slots, illness, base_survival_points):
         items.pop('d')
         items.pop('i')
     sorted_items = sorted(items.items(), key=lambda x: x[1]['points'] / x[1]['size'], reverse=True)
-
+    print(sorted_items)
     for item_code, item_data in sorted_items:
         if item_code in used_items:
             continue
         while slots >= item_data['size']:
-            inventory.append(item_code)
+            size = items[item_code]['size']
+            for i in range(size):
+                inventory.append(item_code)
             used_items.add(item_code)
             slots -= item_data['size']
             break
@@ -66,4 +68,4 @@ inventory, total_survival_points = optimize_inventory(slots, illness, base_survi
 print("Инвентарь:")
 for row in inventory:
     print(",".join(row))
-print("\nИтоговые очки выживания:", total_survival_points)
+print("\nИтоговые очки выживания:", total_survival_points - (205 - total_survival_points))
