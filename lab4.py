@@ -30,7 +30,6 @@ def optimize_inventory(slots, illness, base_survival_points):
         items.pop('d')
         items.pop('i')
     sorted_items = sorted(items.items(), key=lambda x: x[1]['points'] / x[1]['size'], reverse=True)
-    print(sorted_items)
     for item_code, item_data in sorted_items:
         if item_code in used_items:
             continue
